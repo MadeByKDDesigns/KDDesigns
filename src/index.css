@@ -146,6 +146,9 @@ h1 span { color: #14151d; font-weight: inherit; }
 .primary-action:hover { background: #282a33; box-shadow: 0 11px 24px rgba(20, 21, 29, 0.24); transform: translateY(-2px); }
 .primary-action:active { transform: translateY(0); }
 
+.simple-page { align-items: center; display: flex; flex-direction: column; min-height: calc(100vh - 58px); padding: clamp(72px, 12vw, 150px) 24px; text-align: center; }
+.simple-page h1 { font-size: clamp(44px, 6vw, 72px); margin: 0; }
+.simple-page p { color: #646570; font-size: 18px; line-height: 1.5; margin: 18px 0 0; }
 .contact-page { background: #fff; padding-top: 1px; }
 .contact-content { align-items: start; border-top: 1px solid #eee9e8; display: grid; gap: clamp(36px, 5vw, 64px); grid-template-columns: minmax(0, 1fr) minmax(240px, 280px); margin: 0 auto; max-width: 1040px; padding: 0 clamp(24px, 5vw, 72px) 64px; }
 .contact-copy { padding-top: 16px; }

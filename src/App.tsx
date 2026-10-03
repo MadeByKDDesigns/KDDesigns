@@ -1,7 +1,35 @@
 import { useState, type FormEvent } from 'react';
+import { HashRouter, Link, NavLink, Navigate, Route, Routes } from 'react-router-dom';
 import { Mail, MapPin } from 'lucide-react';
 
-const navigationItems = ['About', 'Apps', 'Restaurant Week', 'Contact'];
+const navigationItems = [
+  { label: 'About', path: '/' },
+  { label: 'Apps', path: '/apps' },
+  { label: 'Restaurant Week', path: '/restaurantweek' },
+  { label: 'Contact', path: '/contact' },
+];
+
+function SiteHeader() {
+  return (
+    <header className="site-header">
+      <Link className="brand" to="/">
+        KD Designs
+      </Link>
+      <nav className="site-nav" aria-label="Main navigation">
+        {navigationItems.map((item) => (
+          <NavLink
+            className={({ isActive }) => `nav-link ${isActive ? 'is-active' : ''}`}
+            end={item.path === '/'}
+            key={item.path}
+            to={item.path}
+          >
+            {item.label}
+          </NavLink>
+        ))}
+      </nav>
+    </header>
+  );
+}
 
 function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -15,57 +43,58 @@ function ContactPage() {
     <section className="contact-page" id="contact">
       <div className="contact-content">
         <div className="contact-copy">
-        <h1>
-          Let’s build
-          <br />
-          something that
-          <br />
-          <span>matters.</span>
-        </h1>
-        <p>
-          I'd love to hear from, partner with, and support non-profits and mission driven efforts, especially in healthcare, immigrants' rights, and education.
-        </p>
-      </div>
+          <h1>
+            Let’s build
+            <br />
+            something that
+            <br />
+            <span>matters.</span>
+          </h1>
+          <p>
+            I&apos;d love to hear from, partner with, and support non-profits and mission driven efforts,
+            especially in healthcare, immigrants&apos; rights, and education.
+          </p>
+        </div>
 
-      <div className="contact-card">
-        {isSubmitted ? (
-          <div className="contact-success" role="status">
-            <h2>Message sent.</h2>
-            <p>Thanks for reaching out. I’ll be in touch soon.</p>
-            <button className="contact-reset" onClick={() => setIsSubmitted(false)} type="button">
-              Send another message
-            </button>
-          </div>
-        ) : (
-          <form className="contact-form" onSubmit={handleSubmit}>
-            <label htmlFor="name">Your name</label>
-            <input id="name" name="name" required type="text" />
+        <div className="contact-card">
+          {isSubmitted ? (
+            <div className="contact-success" role="status">
+              <h2>Message sent.</h2>
+              <p>Thanks for reaching out. I’ll be in touch soon.</p>
+              <button className="contact-reset" onClick={() => setIsSubmitted(false)} type="button">
+                Send another message
+              </button>
+            </div>
+          ) : (
+            <form className="contact-form" onSubmit={handleSubmit}>
+              <label htmlFor="name">Your name</label>
+              <input id="name" name="name" required type="text" />
 
-            <label htmlFor="email">Email</label>
-            <input id="email" name="email" required type="email" />
+              <label htmlFor="email">Email</label>
+              <input id="email" name="email" required type="email" />
 
-            <label htmlFor="organization">Organization</label>
-            <input id="organization" name="organization" type="text" />
+              <label htmlFor="organization">Organization</label>
+              <input id="organization" name="organization" type="text" />
 
-            <label htmlFor="mission">Tell me about your mission</label>
-            <textarea id="mission" name="mission" required rows={4} />
+              <label htmlFor="mission">Tell me about your mission</label>
+              <textarea id="mission" name="mission" required rows={4} />
 
-            <button className="contact-submit" type="submit">
-              Send message
-            </button>
+              <button className="contact-submit" type="submit">
+                Send message
+              </button>
 
-            <p className="contact-email">
-              Prefer email? <a href="mailto:madebykddesigns@gmail.com">madebykddesigns@gmail.com</a>
-            </p>
-          </form>
-        )}
+              <p className="contact-email">
+                Prefer email? <a href="mailto:madebykddesigns@gmail.com">madebykddesigns@gmail.com</a>
+              </p>
+            </form>
+          )}
         </div>
       </div>
     </section>
   );
 }
 
-function AboutPage({ onContact }: { onContact: () => void }) {
+function AboutPage() {
   return (
     <section className="hero" id="top">
       <div className="portrait-frame">
@@ -86,46 +115,58 @@ function AboutPage({ onContact }: { onContact: () => void }) {
           <div className="stat-number">3</div>
           <strong>Apps shipped</strong>
         </div>
-        <button className="detail-item email-detail" onClick={onContact} type="button">
+        <Link className="detail-item email-detail" to="/contact">
           <Mail className="detail-icon email-icon" size={23} strokeWidth={1.8} />
           <strong>Say hi →</strong>
-        </button>
+        </Link>
       </div>
 
-      <a className="primary-action" href="#apps">
+      <Link className="primary-action" to="/apps">
         See my apps
-      </a>
+      </Link>
+    </section>
+  );
+}
+
+function SimplePage({ title, description }: { title: string; description: string }) {
+  return (
+    <section className="simple-page">
+      <h1>{title}</h1>
+      <p>{description}</p>
     </section>
   );
 }
 
 function App() {
-  const [selectedPage, setSelectedPage] = useState('About');
-
   return (
-    <main className="site-shell">
-      <header className="site-header">
-        <button className="brand" onClick={() => setSelectedPage('About')} type="button">
-          KD Designs
-        </button>
-        <nav className="site-nav" aria-label="Main navigation">
-          {navigationItems.map((item) => (
-            <button
-              className={`nav-link ${selectedPage === item ? 'is-active' : ''}`}
-              key={item}
-              onClick={() => setSelectedPage(item)}
-              type="button"
-            >
-              {item}
-            </button>
-          ))}
-        </nav>
-      </header>
-
-      {selectedPage === 'Contact' ? <ContactPage /> : <AboutPage onContact={() => setSelectedPage('Contact')} />}
-
-      <div id="apps" />
-    </main>
+    <HashRouter>
+      <main className="site-shell">
+        <SiteHeader />
+        <Routes>
+          <Route element={<AboutPage />} path="/" />
+          <Route
+            element={
+              <SimplePage
+                description="Small, useful apps made with care."
+                title="Apps"
+              />
+            }
+            path="/apps"
+          />
+          <Route
+            element={
+              <SimplePage
+                description="A thoughtful guide to Chicago’s Restaurant Week."
+                title="Restaurant Week"
+              />
+            }
+            path="/restaurantweek"
+          />
+          <Route element={<ContactPage />} path="/contact" />
+          <Route element={<Navigate replace to="/" />} path="*" />
+        </Routes>
+      </main>
+    </HashRouter>
   );
 }
 
