@@ -151,7 +151,7 @@ h1 span { color: #14151d; font-weight: inherit; }
 .simple-page p { color: #646570; font-size: 18px; line-height: 1.5; margin: 18px 0 0; }
 .contact-page { background: #fff; padding-top: 1px; }
 .contact-content { align-items: center; border-top: 1px solid #eee9e8; display: grid; gap: 0; grid-template-columns: 1fr 1fr; margin: 0 auto; max-width: none; min-height: 430px; padding: 48px 0 64px; }
-.contact-copy { justify-self: center; max-width: 500px; padding: 0 32px; text-align: center; }
+.contact-copy { justify-self: center; max-width: 500px; padding: 0 32px; text-align: left; transform: translateY(-14px); }
 .contact-copy h1 { color: #14151d; font-size: clamp(42px, 4.4vw, 56px); letter-spacing: -0.08em; line-height: 0.96; margin: 0; }
 .contact-copy h1 span { color: #f70746; }
 .contact-copy p { color: #646570; font-size: clamp(14px, 1.45vw, 18px); line-height: 1.35; margin: 25px 0 0; }
@@ -177,7 +177,7 @@ h1 span { color: #14151d; font-weight: inherit; }
   .nav-link { padding: 4px 0 8px; }
   .hero { padding-top: 38px; }
   .contact-content { display: block; min-height: 0; padding: 0 24px 64px; }
-  .contact-copy { padding: 20px 0 0; text-align: center; }
+  .contact-copy { padding: 20px 0 0; text-align: center; transform: none; }
   .contact-copy p { font-size: 14px; }
   .contact-card { margin-top: 34px; }
   .details-card { grid-template-columns: 1fr; padding: 10px 14px; }
