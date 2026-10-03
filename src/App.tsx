@@ -98,7 +98,7 @@ function AboutPage() {
   return (
     <section className="hero" id="top">
       <div className="portrait-frame">
-        <img src="/Profile_Pic.jpg" alt="Katie smiling in front of the Chicago skyline" />
+        <img src={`${import.meta.env.BASE_URL}Profile_Pic.jpg`} alt="Katie smiling in front of the Chicago skyline" />
       </div>
       <h1>Hi, I’m Katie <span>:)</span></h1>
       <p className="role">Jelly-bean-powered indie app developer</p>
