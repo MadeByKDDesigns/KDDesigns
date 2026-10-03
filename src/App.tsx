@@ -52,7 +52,7 @@ function ContactPage() {
           </h1>
           <p>
             I&apos;d love to hear from, partner with, and support non-profits and mission driven efforts,
-            especially in healthcare, immigrants&apos; rights, and education.
+            especially in healthcare, education, and immigrants&apos; rights spaces.
           </p>
         </div>
 
